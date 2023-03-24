@@ -1,23 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [items, setItems] = useState([]);
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/items')
+      .then(response => setItems(response.data))
+      .catch(error => console.log(error));
+  }, []);
+
+  const handleNameChange = event => {
+    setName(event.target.value);
+  };
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    axios.post('http://localhost:5000/items', { name })
+      .then(response => setItems([...items, response.data]))
+      .catch(error => console.log(error));
+    setName('');
+  };
+
+  const handleDelete = id => {
+    axios.delete(`http://localhost:5000/items/${id}`)
+      .then(() => setItems(items.filter(item => item.id !== id)))
+      .catch(error => console.log(error));
+  };
+
+  const handleUpdate = (id, newName) => {
+    axios.put(`http://localhost:5000/items/${id}`, { name: newName })
+      .then(response => {
+        const updatedItem = response.data;
+        setItems(items.map(item => item.id === updatedItem.id ? updatedItem : item));
+      })
+      .catch(error => console.log(error));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Items</h1>
+      <ul>
+        {items.map(item => (
+          <li key={item.id}>
+            <span>{item.name}</span>
+            <button onClick={() => handleDelete(item.id)}>Delete</button>
+            <button onClick={() => {
+              const newName = prompt('Enter the new name:', item.name);
+              if (newName !== null) {
+                handleUpdate(item.id, newName);
+              }
+            }}>Update</button>
+          </li>
+        ))}
+      </ul>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={name} onChange={handleNameChange} />
+        <button type="submit">Add</button>
+      </form>
     </div>
   );
 }
