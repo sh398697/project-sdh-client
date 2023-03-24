@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div>
-      <h1>Scott's Amazing React+Flask CRUD Demo</h1>
+      <h1>Scott's React+Flask CRUD Demo</h1>
       <ul>
         {items.map(item => (
           <li key={item.id}>
