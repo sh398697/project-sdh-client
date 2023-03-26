@@ -6,7 +6,7 @@ import UserList from "./UserList";
 function Home({users, setUsers }) {
 
   useEffect( () => {
-    fetch( `http://localhost:8000/users` )
+    fetch( `https://project-sdh-server.onrender.com//users` )
       .then( r => r.json() )
       .then( setUsers )
   }, [] )

@@ -14,7 +14,7 @@ function App() {
   // const [name, setName] = useState('');
 
   // useEffect(() => {
-  //   axios.get('http://localhost:8000/items')
+  //   axios.get('https://project-sdh-server.onrender.com//items')
   //     .then(response => setItems(response.data))
   //     .catch(error => console.log(error));
   // }, []);
@@ -25,20 +25,20 @@ function App() {
 
   // const handleSubmit = event => {
   //   event.preventDefault();
-  //   axios.post('http://localhost:8000/items', { name })
+  //   axios.post('https://project-sdh-server.onrender.com//items', { name })
   //     .then(response => setItems([...items, response.data]))
   //     .catch(error => console.log(error));
   //   setName('');
   // };
 
   // const handleDelete = id => {
-  //   axios.delete(`http://localhost:8000/items/${id}`)
+  //   axios.delete(`https://project-sdh-server.onrender.com//items/${id}`)
   //     .then(() => setItems(items.filter(item => item.id !== id)))
   //     .catch(error => console.log(error));
   // };
 
   // const handleUpdate = (id, newName) => {
-  //   axios.put(`http://localhost:8000/items/${id}`, { name: newName })
+  //   axios.put(`https://project-sdh-server.onrender.com//items/${id}`, { name: newName })
   //     .then(response => {
   //       const updatedItem = response.data;
   //       setItems(items.map(item => item.id === updatedItem.id ? updatedItem : item));
@@ -71,7 +71,7 @@ function App() {
       }
     });
 
-     fetch(`http://localhost:8000/books/${book.id}`, {
+     fetch(`https://project-sdh-server.onrender.com//books/${book.id}`, {
         method: 'PATCH',
         headers: {
          'Content-type': 'application/json',
@@ -98,7 +98,7 @@ function App() {
       }
     });
 
-     fetch(`http://localhost:8000/books/${book.id}`, {
+     fetch(`https://project-sdh-server.onrender.com//books/${book.id}`, {
         method: 'PATCH',
         headers: {
           'Content-type': 'application/json',
