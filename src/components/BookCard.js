@@ -12,7 +12,7 @@ function BookCard({book, removeBookFromState, currentUser, checkOutBook, isMyBoo
   }
 
   function handleDelete(id) {
-    fetch(`${process.env.REACT_APP_API_URL}/books/${id}`, {
+    fetch(`http//localhost:8000/books/${id}`, {
       method: 'DELETE',
       headers: {'Content-Type': 'application/json'}
     })
@@ -47,7 +47,7 @@ function BookCard({book, removeBookFromState, currentUser, checkOutBook, isMyBoo
                 <button className="flex items-center justify-center" onClick={() => handleReturnBookClick(book)}>Return Book</button></div>) : (<div className="flex items-center justify-center" > 
                 { book.owner ? (<div className="flex items-center justify-center" >Checked out to: {book.owner}</div>) : (null)} 
                 { (isLoggedIn && !book.owner) ? (<div className="flex items-center justify-center"><button className="flex items-center justify-center" onClick={handleCheckOutClick}>Check Me Out</button></div>) : (null)}
-                { (!isLoggedIn && !book.owner) ? (<div className="flex items-center justify-center" ><button className="flex items-center justify-center"><NavLink to="/login" exact className="flex items-center justify-center">Login to Check Out</NavLink></button></div>) : (null)}
+                { (!isLoggedIn && !book.owner) ? (<div className="flex items-center justify-center" ><button className="flex items-center justify-center"><NavLink to="/login" exact path="/login" className="flex items-center justify-center">Login to Check Out</NavLink></button></div>) : (null)}
                 </div>)}
               <div>{currentUser === "admin" ? (<div className="flex items-center justify-center"><button className="flex items-center justify-center" type="button" onClick={()=>handleDelete(book.id)}>Remove Book</button></div>) : (null)}</div>
       </div>

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from 'axios';
 
 function NewBookForm({ addBookToState}) {
   
@@ -9,6 +10,7 @@ function NewBookForm({ addBookToState}) {
   const [ newYear, setYear ] = useState( '' )
   const [ newImage, setImage ] = useState( '' )
   const [ newReview, setReview ] = useState( '' )
+  const [ newOwner, setOwner ] = useState( '' )
 
   const handleTitle = e => setTitle( e.target.value )
   const handleAuthor = e => setAuthor( e.target.value )
@@ -30,15 +32,33 @@ function NewBookForm({ addBookToState}) {
       owner: ""
     }
 
-    fetch( `${process.env.REACT_APP_API_URL}/books`, {
-      method: 'POST', 
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify( newBook )
-    } )
-      .then( r => r.json() )
-      .then( addBookToState )
-    e.target.reset()
-  }
+    axios.post('http://localhost:8000/books', { 
+      title: newTitle,
+      author: newAuthor,
+      genre: newGenre,
+      year: newYear,
+      image: newImage,
+      review: newReview,
+      owner: ""
+     })
+       //.then( r => r.json() )
+       .then( addBookToState )
+       .then (e.target.reset())
+     }
+
+  //   axios.post('http://localhost:8000/items', { name })
+  //     .then(response => setItems([...items, response.data]))
+
+
+  //    fetch( 'http://localhost:8000/books', {
+  //      method: 'POST', 
+  //      headers: { 'Content-Type': 'application/json' },
+  //      body: JSON.stringify( newBook )
+  //    } )
+  //      .then( r => r.json() )
+  //      .then( addBookToState )
+  //    e.target.reset()
+  //  }
   
   return (
     <div className="container mx-auto bg-gray-200 rounded-xl border p-8 m-10">

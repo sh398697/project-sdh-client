@@ -26,7 +26,7 @@ function HomePage({books, setBooks, currentUser, checkOutBook}) {
   const searchedBooks = books.filter( byKeyword )
 
   useEffect( () => {
-    fetch( `${process.env.REACT_APP_API_URL}/books/` )
+    fetch( `http://localhost:8000/books` )
       .then( r => r.json() )
       .then( setBooks )
   }, [] )
