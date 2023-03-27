@@ -8,6 +8,10 @@ import HomePage from "./components/HomePage";
 import Home from "./components/Home";
 import About from "./components/About";
 import NewBookForm from "./components/NewBookForm";
+import User from "./components/User";
+import Post from "./components/Post";
+import Friendship from "./components/Friendship";
+
 
 function App() {
   // const [items, setItems] = useState([]);
@@ -48,6 +52,8 @@ function App() {
 
   const [books, setBooks] = useState([])
   const [users, setUsers] = useState([])
+  const [posts, setPosts] = useState([])
+  const [friendships, setFriendships] = useState([])
   const [currentUser, setCurrentUser] = useState('')
 
   
@@ -57,6 +63,14 @@ function App() {
 
   const addUserToState = userObj => {
     setUsers( [ ...users, userObj ] )
+  }
+
+  const addPostToState = postObj => {
+    setPosts( [ ...posts, postObj ] )
+  }
+
+  const addFriendshipToState = friendshipObj => {
+    setFriendships( [ ...friendships, friendshipObj ] )
   }
 
 
