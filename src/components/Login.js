@@ -1,13 +1,15 @@
 import React from "react";
 
-function Login({currentUser, setCurrentUser}) {
+function Login({users, currentUser, setCurrentUser}) {
     
     function handleLogoutClick(e) {
+        e.preventDefault();
         setCurrentUser("");
     }
 
     function handleLoginClick(e) {
-        setCurrentUser(e.target.username.value);
+        e.preventDefault();
+        setCurrentUser(e.target.username.value)
     }   
 
     return (
