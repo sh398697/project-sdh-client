@@ -13,6 +13,7 @@ function App() {
   const [posts, setPosts] = useState([])
   const [friendships, setFriendships] = useState([])
   const [currentUser, setCurrentUser] = useState('')
+  const [loggedInUser, setLoggedInUser] = useState('')
   const [selectedUser, setSelectedUser] = useState('1')
 
   const addUserToState = userObj => {
@@ -32,10 +33,10 @@ function App() {
         <Header currentUser={currentUser}/>
         <Switch>
           <Route exact path="/userpage">
-            <UserPage user={selectedUser} posts={posts} currentUser={currentUser} setCurrentUser={setCurrentUser} users={users} />
+            <UserPage user={selectedUser} posts={posts} currentUser={currentUser} setCurrentUser={setCurrentUser} users={users} loggedInUser={loggedInUser} addPostToState={addPostToState} />
           </Route>
           <Route exact path="/login">
-            <Login users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} />
+            <Login users={users} currentUser={currentUser} setCurrentUser={setCurrentUser} loggedInUser={loggedInUser} setLoggedInUser={setLoggedInUser} />
           </Route>
           <Route exact path="/about">
             <About />

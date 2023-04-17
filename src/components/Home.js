@@ -1,27 +1,24 @@
-import React from "react";
-import { useState, useEffect } from "react";
-import UserList from "./UserList";
-import PostList from "./PostList";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import UserList from './UserList';
+import PostList from './PostList';
 
 function Home({users, setUsers, friendships, setFriendships, posts, setPosts, selectedUser, setSelectedUser}) {
 
-  useEffect( () => {
-  fetch( `http://localhost:8000/users` )
-       .then( r => r.json() )
-       .then( setUsers )
-   }, [] )
-
-  useEffect( () => {
-    fetch( `http://localhost:8000/friendships` )
-       .then( r => r.json() )
-       .then( setFriendships )
-  }, [] )
-
-  useEffect( () => {
-    fetch( `http://localhost:8000/posts` )
-      .then( r => r.json() )
-      .then( setPosts )
-  }, [] )
+  useEffect(() => {
+    axios.get('https://project-sdh-server.onrender.com/users')
+      .then(response => setUsers(response.data));
+  }, []);
+  
+  useEffect(() => {
+    axios.get('https://project-sdh-server.onrender.com/friendships')
+      .then(response => setFriendships(response.data));
+  }, []);
+  
+  useEffect(() => {
+    axios.get('https://project-sdh-server.onrender.com/posts')
+      .then(response => setPosts(response.data));
+  }, []);
 
   return (
       <div className="container mx-auto bg-gray-200 rounded-xl border p-8 m-10">

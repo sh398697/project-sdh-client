@@ -1,6 +1,6 @@
 import React from "react";
 
-function Login({users, currentUser, setCurrentUser}) {
+function Login({users, currentUser, setCurrentUser, loggedInUser, setLoggedInUser}) {
     
     function handleLogoutClick(e) {
         e.preventDefault();
@@ -9,7 +9,17 @@ function Login({users, currentUser, setCurrentUser}) {
 
     function handleLoginClick(e) {
         e.preventDefault();
-        setCurrentUser(e.target.username.value)
+        const username = e.target.username.value;
+        for (let i = 0; i < users.length; i++) {
+            if (users[i].email === username) {
+                setCurrentUser(users[i].fname);
+
+                const newLoggedInUser = users[i];
+                setLoggedInUser(newLoggedInUser)
+
+                break;
+            }
+        }
     }   
 
     return (
@@ -18,7 +28,7 @@ function Login({users, currentUser, setCurrentUser}) {
         { currentUser ? (
             <div className="px-2 py-1">
                 <span className="flex justify-center px-1 py-2">Logged-In as: </span>
-                <span className="flex justify-center px-2 py-1">{currentUser}</span>
+                <span className="flex justify-center px-2 py-1">{loggedInUser.fname} {loggedInUser.lname}</span>
                 <div className="flex justify-center px-2 py-3">
                     <button onClick={handleLogoutClick}>Logout</button>
                 </div>
@@ -32,7 +42,15 @@ function Login({users, currentUser, setCurrentUser}) {
                 <div className="flex justify-center px-2 py-3">
                     <button type="submit">Login</button>
                 </div>
-            </form>)}
+            </form>)
+        }
+        <div>
+            <div>{currentUser}</div>
+        </div>
+        <div>
+            <p className="text-sm text-gray-500">Don't have an account?</p>
+            <p className="text-sm text-gray-500">Sign Up</p>
+        </div>
     </div>
   );
 }
